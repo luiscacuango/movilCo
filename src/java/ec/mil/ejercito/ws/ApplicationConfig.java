@@ -31,8 +31,12 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(ec.mil.ejercito.ws.ParteMovilResource.class);
+        resources.add(ec.mil.ejercito.ws.bdd.service.XperPerfilsistemaFacadeREST.class);
+        resources.add(ec.mil.ejercito.ws.bdd.service.XpusPerfilusarioFacadeREST.class);
+        resources.add(ec.mil.ejercito.ws.bdd.service.XsisSistemaSubsistemaFacadeREST.class);
+        resources.add(ec.mil.ejercito.ws.bdd.service.XuniUserFacadeREST.class);
         resources.add(ec.mil.ejercito.ws.bdd.service.XusrUsuariosistemaFacadeREST.class);
-        resources.add(ec.mil.ejercito.ws.bdd.service.parte.SeguridadWs.class);
+        resources.add(ec.mil.ejercito.ws.bdd.service.parte.SeguridadWs2.class);
     }
     
 }

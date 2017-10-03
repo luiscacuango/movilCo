@@ -14,6 +14,7 @@ public class UsuarioDTO {
     private String gmiSiglas;
     private String ptefTEfe;
     private String uniSiglas2;
+    private String uniCodigo2;
     private List<PersonaDTO> listaPerfil;
     private List<PersonaDTO> listaPersonal;
     private List<PersonaDTO> listaPersonalNov;
@@ -99,6 +100,14 @@ public class UsuarioDTO {
 
     public void setListaPersonalNov(List<PersonaDTO> listaPersonalNov) {
         this.listaPersonalNov = listaPersonalNov;
+    }
+
+    public String getUniCodigo2() {
+        return uniCodigo2;
+    }
+
+    public void setUniCodigo2(String uniCodigo2) {
+        this.uniCodigo2 = uniCodigo2;
     }
     
     

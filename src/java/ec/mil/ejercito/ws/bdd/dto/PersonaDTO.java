@@ -15,6 +15,10 @@ public class PersonaDTO {
     private String gmiCodigo;
     private String ptefTEfe;
     private String uniSiglas2;
+    private String novedad;
+    private Date novFecini;
+    private Date novFecfin;
+    private Date novFecpre;
     private List<NovedadDTO> listaNovedad;
     
     public PersonaDTO() {
@@ -74,6 +78,14 @@ public class PersonaDTO {
 
     public void setListaNovedad(List<NovedadDTO> listaNovedad) {
         this.listaNovedad = listaNovedad;
+    }
+
+    public String getNovedad() {
+        return novedad;
+    }
+
+    public void setNovedad(String novedad) {
+        this.novedad = novedad;
     }
 
 }

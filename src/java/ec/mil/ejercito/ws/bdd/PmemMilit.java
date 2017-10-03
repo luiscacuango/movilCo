@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -118,6 +120,13 @@ public class PmemMilit implements Serializable {
     private String razSecuen;
     @Column(name = "REL_CODIGO")
     private Integer relCodigo;
+
+    @OneToMany(mappedBy = "memCedula")
+    private List<XusrUsuariosistema> usuario;
+
+    @JoinColumn(name = "UNI_CODIGO2", referencedColumnName = "UNI_CODIGO2")
+    @ManyToOne
+    private MuniUnida uniCodigo2;
 
     public PmemMilit() {
     }
@@ -468,6 +477,22 @@ public class PmemMilit implements Serializable {
 
     public void setRelCodigo(Integer relCodigo) {
         this.relCodigo = relCodigo;
+    }
+
+    public List<XusrUsuariosistema> getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(List<XusrUsuariosistema> usuario) {
+        this.usuario = usuario;
+    }
+
+    public MuniUnida getUniCodigo2() {
+        return uniCodigo2;
+    }
+
+    public void setUniCodigo2(MuniUnida uniCodigo2) {
+        this.uniCodigo2 = uniCodigo2;
     }
 
     @Override

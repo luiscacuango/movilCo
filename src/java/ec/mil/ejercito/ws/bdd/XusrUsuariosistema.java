@@ -1,33 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package ec.mil.ejercito.ws.bdd;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * @unidad SIPER
  * @author Cbop. Cacuango Luis
  */
 @Entity
-@Table(name = "XUSR_USUARIOSISTEMA")
+@Table(name = "XUSR_USUARIOSISTEMA", schema = "SEGURIDADES")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "XusrUsuariosistema.findAll", query = "SELECT x FROM XusrUsuariosistema x"),
@@ -45,13 +43,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "XusrUsuariosistema.findBySisEsquema", query = "SELECT x FROM XusrUsuariosistema x WHERE x.sisEsquema = :sisEsquema"),
     @NamedQuery(name = "XusrUsuariosistema.findByUsrPassmd5", query = "SELECT x FROM XusrUsuariosistema x WHERE x.usrPassmd5 = :usrPassmd5")})
 public class XusrUsuariosistema implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
-    @Column(name = "MEM_CEDULA")
-    private String memCedula;
     @Column(name = "USR_ACTIVO")
     private BigInteger usrActivo;
     @Size(max = 50)
@@ -84,18 +79,23 @@ public class XusrUsuariosistema implements Serializable {
     @Column(name = "USR_PASSMD5")
     private String usrPassmd5;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "xusrUsuariosistema")
+    private Collection<XpusPerfilusario> xpusPerfilusarioCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "xusrUsuariosistema")
+    private Collection<XuniUser> xuniUserCollection;
+
+    @JoinColumn(name = "MEM_CEDULA", referencedColumnName = "MEM_CEDULA")
+    @ManyToOne
+    private PmemMilit memCedula;
+
     public XusrUsuariosistema() {
     }
 
-    public XusrUsuariosistema(String memCedula) {
-        this.memCedula = memCedula;
-    }
-
-    public String getMemCedula() {
+    public PmemMilit getMemCedula() {
         return memCedula;
     }
 
-    public void setMemCedula(String memCedula) {
+    public void setMemCedula(PmemMilit memCedula) {
         this.memCedula = memCedula;
     }
 
@@ -195,6 +195,22 @@ public class XusrUsuariosistema implements Serializable {
         this.usrPassmd5 = usrPassmd5;
     }
 
+    public Collection<XpusPerfilusario> getXpusPerfilusarioCollection() {
+        return xpusPerfilusarioCollection;
+    }
+
+    public void setXpusPerfilusarioCollection(Collection<XpusPerfilusario> xpusPerfilusarioCollection) {
+        this.xpusPerfilusarioCollection = xpusPerfilusarioCollection;
+    }
+
+    public Collection<XuniUser> getXuniUserCollection() {
+        return xuniUserCollection;
+    }
+
+    public void setXuniUserCollection(Collection<XuniUser> xuniUserCollection) {
+        this.xuniUserCollection = xuniUserCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -219,5 +235,5 @@ public class XusrUsuariosistema implements Serializable {
     public String toString() {
         return "ec.mil.ejercito.ws.bdd.XusrUsuariosistema[ memCedula=" + memCedula + " ]";
     }
-    
+
 }
